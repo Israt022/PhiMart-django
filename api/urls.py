@@ -20,6 +20,8 @@ urlpatterns = [
     path('',include(router.urls)),
     path('',include(product_router.urls)),
     path('',include(cart_router.urls)),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
     # path('products/',include('product.product_urls')),
     # path('categories/',include('product.category_urls')),
 ]
