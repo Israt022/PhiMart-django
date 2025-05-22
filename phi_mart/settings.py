@@ -182,18 +182,17 @@ SIMPLE_JWT = {
 
 # Front End Local and Vercel Deploying Setup 
 
-DEBUG = config("DEBUG", default=False, cast=bool)
+# DEBUG = config("DEBUG", default=False, cast=bool)
 
-if DEBUG:
-    FRONTEND_DOMAIN = config('FRONTEND_DOMAIN_LOCAL')
-    FRONTEND_PROTOCOL = config('FRONTEND_PROTOCOL_LOCAL')
-else:
-    FRONTEND_DOMAIN = config('FRONTEND_DOMAIN_PROD')
-    FRONTEND_PROTOCOL = config('FRONTEND_PROTOCOL_PROD')
-    
+# if DEBUG:
+#     FRONTEND_DOMAIN = config('FRONTEND_DOMAIN_LOCAL')
+#     FRONTEND_PROTOCOL = config('FRONTEND_PROTOCOL_LOCAL')
+# else:
+#     FRONTEND_DOMAIN = config('FRONTEND_DOMAIN_PROD')
+#     FRONTEND_PROTOCOL = config('FRONTEND_PROTOCOL_PROD')
 DJOSER = {
-    'EMAIL_FRONTEND_PROTOCOL': FRONTEND_PROTOCOL,
-    'EMAIL_FRONTEND_DOMAIN': FRONTEND_DOMAIN,
+    'EMAIL_FRONTEND_PROTOCOL'  : config('FRONTEND_PROTOCOL'),
+    'EMAIL_FRONTEND_DOMAIN'    : config('FRONTEND_DOMAIN'),
     'EMAIL_FRONTEND_SITE_NAME' : 'PhiMart',
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',
