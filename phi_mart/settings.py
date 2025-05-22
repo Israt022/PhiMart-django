@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-dr%_!s%-d7q5ub&(&av5hoz#26zk^ml6@z-47x(x8-@rli)r&q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 
 ALLOWED_HOSTS = [".vercel.app", '127.0.0.1']
 AUTH_USER_MODEL = 'users.User'
@@ -182,17 +182,17 @@ SIMPLE_JWT = {
 
 # Front End Local and Vercel Deploying Setup 
 
-DEBUG = config("DEBUG", default=False, cast=bool)
-if DEBUG:
-    FRONTEND_PROTOCOL = config("FRONTEND_PROTOCOL_LOCAL")
-    FRONTEND_DOMAIN = config("FRONTEND_DOMAIN_LOCAL")
-else:
-    FRONTEND_PROTOCOL = config("FRONTEND_PROTOCOL_PROD")
-    FRONTEND_DOMAIN = config("FRONTEND_DOMAIN_PROD")
+# DEBUG = config("DEBUG", default=False, cast=bool)
+# if DEBUG:
+#     FRONTEND_PROTOCOL = config("FRONTEND_PROTOCOL_LOCAL")
+#     FRONTEND_DOMAIN = config("FRONTEND_DOMAIN_LOCAL")
+# else:
+#     FRONTEND_PROTOCOL = config("FRONTEND_PROTOCOL_PROD")
+#     FRONTEND_DOMAIN = config("FRONTEND_DOMAIN_PROD")
     
 DJOSER = {
-    "EMAIL_FRONTEND_PROTOCOL": FRONTEND_PROTOCOL,
-    "EMAIL_FRONTEND_DOMAIN": FRONTEND_DOMAIN,
+    "EMAIL_FRONTEND_PROTOCOL": config('FRONTEND_PROTOCOL'),
+    "EMAIL_FRONTEND_DOMAIN": config('FRONTEND_DOMAIN'),
     'EMAIL_FRONTEND_SITE_NAME' : 'PhiMart',
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',
