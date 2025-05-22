@@ -182,21 +182,17 @@ SIMPLE_JWT = {
 
 # Front End Local and Vercel Deploying Setup 
 
-DEBUG = config("DEBUG", default=False, cast=bool)
 
 if DEBUG:
-    FRONTEND_DOMAIN = config("FRONTEND_DOMAIN_LOCAL", default="localhost:5173")
-    FRONTEND_PROTOCOL = config("FRONTEND_PROTOCOL_LOCAL", default="http")
+    FRONTEND_PROTOCOL = config("FRONTEND_PROTOCOL_LOCAL")
+    FRONTEND_DOMAIN = config("FRONTEND_DOMAIN_LOCAL")
 else:
-    FRONTEND_DOMAIN = config("FRONTEND_DOMAIN", default="phimart-client-iota.vercel.app")
-    FRONTEND_PROTOCOL = config("FRONTEND_PROTOCOL", default="https")
+    FRONTEND_PROTOCOL = config("FRONTEND_PROTOCOL_PROD")
+    FRONTEND_DOMAIN = config("FRONTEND_DOMAIN_PROD")
     
-print("Frontend Protocol:", FRONTEND_PROTOCOL)
-print("Frontend Domain:", FRONTEND_DOMAIN)
-
 DJOSER = {
-    'EMAIL_FRONTEND_PROTOCOL': FRONTEND_PROTOCOL,
-    'EMAIL_FRONTEND_DOMAIN': FRONTEND_DOMAIN,
+    "EMAIL_FRONTEND_PROTOCOL": FRONTEND_PROTOCOL,
+    "EMAIL_FRONTEND_DOMAIN": FRONTEND_DOMAIN,
     'EMAIL_FRONTEND_SITE_NAME' : 'PhiMart',
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',
