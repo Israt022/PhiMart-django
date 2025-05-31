@@ -113,10 +113,14 @@ class OrderViewset(ModelViewSet):
 @api_view(['POST'])
 
 def initiate_payment(request):
+    
+    print(request.data)
     user = request.user 
     amount = request.data.get("amount")
     order_id = request.data.get("orderId")
     num_items = request.data.get("numItems")
+    
+    print("User -> ",user)
     
     settings = { 'store_id': 'phima683884b503c26',
                 'store_pass': 'phima683884b503c26@ssl', 'issandbox': True }
@@ -135,7 +139,7 @@ def initiate_payment(request):
     post_body['cus_add1'] = user.address
     post_body['cus_city'] = "Dhaka"
     post_body['cus_country'] = "Bangladesh"
-    post_body['shipping_method'] = "Courier"
+    post_body['shipping_method'] = "NO"
     post_body['multi_card_name'] = ""
     post_body['num_of_item'] = num_items
     post_body['product_name'] = "E-commerce Products"
@@ -144,6 +148,7 @@ def initiate_payment(request):
 
 
     response = sslcz.createSession(post_body) # API response
+    print(response)
     
     if (response.get('status') == 'SUCCESS'):
         return Response({'payment_url' : response['GatewayPageURL']})
