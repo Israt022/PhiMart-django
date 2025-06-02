@@ -14,6 +14,7 @@ from sslcommerz_lib import SSLCOMMERZ
 from django.conf import settings as main_settings
 from rest_framework import status
 from django.http import HttpResponseRedirect
+from rest_framework.views import APIView
 
 # Create your views here.
 
@@ -173,3 +174,11 @@ def payment_cancel(request):
 def payment_fail(request):
     return HttpResponseRedirect(f"{main_settings.FRONTEND_URL}/dashboard/orders/")
 
+class HasOrderedProduct(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, product_id):
+        user = request.user
+        has_ordered = OrderItem.objects.filter(order__user = user,product_id = product_id).exists()
+        
+        return Response({'hasOrdered' : has_ordered})
